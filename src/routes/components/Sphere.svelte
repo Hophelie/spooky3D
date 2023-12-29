@@ -58,28 +58,52 @@
 
 	const sphere = {
 		position: {
-			x: 0.40000000000000036,
-			y: 4.199999999999999,
-			z: -4.2
+			x:-6.70,
+			y:3.20,
+			z: -4
 		}
 	};
+	let moonLight = {
+		position: {
+			x: sphere.position.x,
+			y: sphere.position.y,
+			z: sphere.position.z
+		},
+		intensity:3
+	};
+	// if (browser) {
+	// 	const pane = new Pane({
+	// 		title: 'Scene'
+	// 	});
+	// 	const moon = pane.addFolder({
+	// 		title: 'Moon'
+	// 	});
+	// 	moon.addBinding(sphere, 'position', {
+	// 		multiline: true,
+	// 		bufferSize: 3
+	// 	});
+	// 	moon.on('change', (ev) => {
+	// 		sphere.position = ev.value as any;
+	// 	});
+	// 	const moonLightControls = pane.addFolder({
+	// 		title: 'MoonLight'
+	// 	});
+	// 	moonLightControls.addBinding(moonLight, 'position', {
+	// 		multiline: true,
+	// 		bufferSize: 3
+	// 	});
+	// 	moonLightControls.addBinding(moonLight, 'intensity')
+	// 	moonLightControls.on('change', (ev) => {
+	// 		console.log(ev.value instanceof Object);
+	// 		if (ev.value instanceof Object ) {
+	// 			moonLight.position = ev.value as any;
+	// 			 }else{
+	// 				moonLight.intensity = ev.value as any;
+	// 		 }
+			
+	// 	});
+	// }
 
-	if (browser) {
-		const pane = new Pane({
-			title: 'Scene'
-		});
-		const sphereControls = pane.addFolder({
-			title: 'Sphere'
-		});
-		sphereControls.addBinding(sphere, 'position', {
-			multiline: true,
-			bufferSize: 3
-		});
-		sphereControls.on('change', (ev) => {
-			sphere.position = ev.value as any;
-			console.log(sphere.position);
-		});
-	}
 </script>
 
 <Threlte.T.PerspectiveCamera
@@ -92,11 +116,18 @@
 	<OrbitControls />
 </Threlte.T.PerspectiveCamera>
 
-<Threlte.T.DirectionalLight position={[3, 10, 7]} color={'#0D163D'} intensity={60} />
+<Threlte.T.DirectionalLight
+	position={[moonLight.position.x, moonLight.position.y, moonLight.position.z]}
+	color={'#FFFABF'}
+	intensity={moonLight.intensity}
+	isDirectionalLight
+	castShadow
+/>
+
 
 <Threlte.T.Mesh position={[sphere.position.x, sphere.position.y, sphere.position.z]}>
 	<Threlte.T.SphereGeometry args={[1]} />
-	<Threlte.T.MeshStandardMaterial color="skyblue" />
+	<Threlte.T.MeshBasicMaterial color="#FFFABF" />
 </Threlte.T.Mesh>
 
 <!-- <Grid cellColor="#FE3D00" sectionColor="#FE3D00" />  -->
